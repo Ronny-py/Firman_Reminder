@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firman Reminder — Notifikasi Ayat Alkitab Offline</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --bg-alt: #ffffff;
+    --text: #26241f;
+    --text-muted: #6b6558;
+    --accent: #8a5a3b;
+    --accent-dark: #6e4530;
+    --accent-soft: #f0e3d4;
+    --border: #e5ddcf;
+    --card-shadow: 0 8px 24px rgba(60, 45, 25, 0.08);
+    --success: #4b7a51;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1c1a17;
+      --bg-alt: #262320;
+      --text: #efe9de;
+      --text-muted: #b0a89a;
+      --accent: #d99a6c;
+      --accent-dark: #eab081;
+      --accent-soft: #3a2e22;
+      --border: #3a352c;
+      --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1c1a17;
+    --bg-alt: #262320;
+    --text: #efe9de;
+    --text-muted: #b0a89a;
+    --accent: #d99a6c;
+    --accent-dark: #eab081;
+    --accent-soft: #3a2e22;
+    --border: #3a352c;
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px 64px;
+  }
+
+  header.hero {
+    text-align: center;
+    padding: 56px 20px 40px;
+    background: linear-gradient(180deg, var(--accent-soft), transparent);
+  }
+  .app-icon {
+    font-size: 56px;
+    line-height: 1;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 1.9rem;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .tagline {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 480px;
+    margin: 0 auto 28px;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 14px 28px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .download-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+  .download-sub {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  section {
+    margin-top: 40px;
+  }
+  h2 {
+    font-size: 1.25rem;
+    margin: 0 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .feature-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: var(--card-shadow);
+  }
+  .feature-card .emoji { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+  .feature-card h3 {
+    font-size: 0.98rem;
+    margin: 0 0 4px;
+  }
+  .feature-card p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: step;
+  }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 14px 16px 14px 52px;
+    margin-bottom: 10px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .steps strong { display: block; margin-bottom: 2px; }
+  .steps span.desc { font-size: 0.9rem; color: var(--text-muted); }
+
+  .notice {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .notice strong { color: var(--accent-dark); }
+
+  .perm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    overflow-x: auto;
+    display: block;
+  }
+  .perm-table th, .perm-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .perm-table th {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  footer {
+    margin-top: 56px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .scroll-x {
+    overflow-x: auto;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="app-icon">✝️📖</span>
+    <h1>Firman Reminder</h1>
+    <p class="tagline">Notifikasi ayat Alkitab berkala di HP kamu — 100% offline, tetap muncul walau layar terkunci.</p>
+
+    <a class="download-btn" href="#" id="download-link">
+      ⬇️ Download APK (v1.0)
+    </a>
+    <div class="download-sub">Untuk Android 8.0 (Oreo) ke atas · ±5–10 MB</div>
+  </header>
+
+  <section>
+    <h2>✨ Fitur</h2>
+    <div class="features">
+      <div class="feature-card">
+        <span class="emoji">⏰</span>
+        <h3>Notifikasi berkala</h3>
+        <p>Ayat dikirim otomatis tiap 30 / 60 / 120 menit, bisa diatur sendiri.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🌙</span>
+        <h3>Jam aktif</h3>
+        <p>Atur jam mulai & selesai notifikasi (default 07.00–22.00).</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔀</span>
+        <h3>Ayat tanpa pengulangan</h3>
+        <p>Semua ayat diacak dulu sebelum diulang, otomatis reshuffle setelah habis.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">📴</span>
+        <h3>100% offline</h3>
+        <p>Tidak ada koneksi internet yang dipakai untuk notifikasi ayat.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔒</span>
+        <h3>Muncul saat layar terkunci</h3>
+        <p>Pakai alarm presisi, tetap tampil walau HP dalam mode hemat baterai.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">🔁</span>
+        <h3>Bertahan setelah restart</h3>
+        <p>Notifikasi otomatis dijadwalkan ulang setiap HP dinyalakan lagi.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">📖</span>
+        <h3>Baca pasal lengkap</h3>
+        <p>Buka pasal penuh di alkitab.sabda.org langsung dari ayat yang tampil.</p>
+      </div>
+      <div class="feature-card">
+        <span class="emoji">💬</span>
+        <h3>Bagikan ke WhatsApp</h3>
+        <p>Kirim ayat + kalimat penguatan ke teman atau keluarga dengan satu tombol.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>📲 Cara install di HP</h2>
+    <ol class="steps">
+      <li>
+        <strong>Download file APK</strong>
+        <span class="desc">Tekan tombol download di atas menggunakan browser HP (Chrome/Samsung Internet, dll).</span>
+      </li>
+      <li>
+        <strong>Izinkan install dari sumber tidak dikenal</strong>
+        <span class="desc">Saat pertama install, Android akan menampilkan peringatan. Ketuk "Setelan" pada peringatan tersebut, lalu aktifkan "Izinkan dari sumber ini" untuk browser yang kamu pakai.</span>
+      </li>
+      <li>
+        <strong>Ketuk file APK yang sudah terdownload</strong>
+        <span class="desc">Buka lewat notifikasi download atau folder "Downloads", lalu ketuk "Install".</span>
+      </li>
+      <li>
+        <strong>Buka aplikasi & izinkan notifikasi</strong>
+        <span class="desc">Saat pertama dibuka, aplikasi akan meminta izin notifikasi — ketuk "Izinkan" agar pengingat ayat bisa muncul.</span>
+      </li>
+      <li>
+        <strong>Aktifkan izin alarm presisi</strong>
+        <span class="desc">Aplikasi otomatis mengarahkan ke halaman Setelan untuk mengizinkan "Alarm & pengingat" — aktifkan supaya notifikasi tepat waktu.</span>
+      </li>
+      <li>
+        <strong>(Disarankan) Matikan optimasi baterai untuk app ini</strong>
+        <span class="desc">Buka menu Pengaturan di dalam aplikasi → ketuk tombol untuk mengizinkan aplikasi berjalan tanpa dibatasi baterai, supaya notifikasi tidak berhenti saat HP idle lama.</span>
+      </li>
+    </ol>
+
+    <div class="notice" style="margin-top: 16px;">
+      <strong>Catatan:</strong> Peringatan "aplikasi tidak dikenal" atau "Play Protect" itu wajar untuk APK yang tidak diunduh dari Play Store. Aplikasi ini tidak meminta akses internet untuk data pribadi apa pun — satu-satunya fitur yang membuka internet adalah tombol "Baca Pasal Lengkap".
+    </div>
+  </section>
+
+  <section>
+    <h2>🔑 Izin yang digunakan</h2>
+    <div class="scroll-x">
+      <table class="perm-table">
+        <tr><th>Izin</th><th>Kegunaan</th></tr>
+        <tr><td>Notifikasi</td><td>Menampilkan pengingat ayat Alkitab</td></tr>
+        <tr><td>Alarm & pengingat presisi</td><td>Menjadwalkan notifikasi tepat waktu, walau layar terkunci</td></tr>
+        <tr><td>Jalankan saat startup</td><td>Menjadwalkan ulang notifikasi setelah HP di-restart</td></tr>
+        <tr><td>Abaikan optimasi baterai (opsional)</td><td>Mencegah sistem menghentikan notifikasi saat HP idle lama</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    Firman Reminder · Dibuat untuk penggunaan pribadi · Tidak berafiliasi dengan Google Play
+  </footer>
+
+</div>
+</body>
+</html>
