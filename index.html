@@ -211,6 +211,50 @@
   .scroll-x {
     overflow-x: auto;
   }
+
+  .other-projects {
+    margin-top: 48px;
+    background: linear-gradient(135deg, var(--accent-soft), var(--bg-alt));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 24px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+  }
+  .other-projects .op-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+  .other-projects h2 {
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+  .other-projects p {
+    margin: 0 0 18px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .op-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 24px;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .op-link-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+  .op-link-btn .arrow { transition: transform 0.15s ease; }
+  .op-link-btn:hover .arrow { transform: translateX(3px); }
 </style>
 </head>
 <body>
@@ -318,6 +362,15 @@
         <tr><td>Abaikan optimasi baterai (opsional)</td><td>Mencegah sistem menghentikan notifikasi saat HP idle lama</td></tr>
       </table>
     </div>
+  </section>
+
+  <section class="other-projects">
+    <span class="op-icon">🚀</span>
+    <h2>Lihat Proyek Lainnya</h2>
+    <p>Untuk proyek lain bisa klik tombol di bawah — kumpulan aplikasi, automation, dan sistem custom lainnya yang sudah dibuat.</p>
+    <a class="op-link-btn" href="https://ronny-py.github.io/jasacoding/" target="_blank" rel="noopener">
+      Kunjungi Portfolio <span class="arrow">→</span>
+    </a>
   </section>
 
   <footer>
