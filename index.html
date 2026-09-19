@@ -255,6 +255,74 @@
   .op-link-btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
   .op-link-btn .arrow { transition: transform 0.15s ease; }
   .op-link-btn:hover .arrow { transform: translateX(3px); }
+
+  /* ===== Screenshot mockups ===== */
+  .shots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    margin-top: 8px;
+  }
+  .shot-item { text-align: center; }
+  .shot-caption { margin-top: 12px; font-weight: 600; font-size: 0.95rem; }
+  .shot-desc { margin-top: 4px; font-size: 0.82rem; color: var(--text-muted); }
+  .phone-frame {
+    width: 220px; height: 460px; margin: 0 auto;
+    background: #111; border-radius: 32px; padding: 10px;
+    box-shadow: var(--card-shadow); position: relative;
+  }
+  .phone-notch {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    width: 70px; height: 16px; background: #111; border-radius: 0 0 10px 10px; z-index: 2;
+  }
+  .phone-screen {
+    width: 100%; height: 100%; background: var(--bg); border-radius: 22px;
+    overflow: hidden; display: flex; flex-direction: column; font-size: 11px;
+  }
+  .mock-appbar {
+    background: var(--accent); color: #fff; padding: 22px 14px 10px;
+    font-weight: 700; font-size: 13px; text-align: center;
+  }
+  .mock-body { flex: 1; padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
+  .mock-verse-card {
+    background: var(--bg-alt); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px; box-shadow: var(--card-shadow);
+  }
+  .mock-ref { color: var(--accent); font-weight: 700; font-size: 11px; margin-bottom: 6px; }
+  .mock-verse-text { font-size: 10.5px; line-height: 1.45; color: var(--text); }
+  .mock-encourage {
+    margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border);
+    font-size: 9.5px; font-style: italic; color: var(--text-muted);
+  }
+  .mock-btn {
+    background: var(--accent); color: #fff; text-align: center; padding: 9px;
+    border-radius: 10px; font-size: 10.5px; font-weight: 600;
+  }
+  .mock-btn.outline { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+  .mock-btn-row { display: flex; gap: 6px; }
+  .mock-btn-row .mock-btn { flex: 1; }
+  .mock-settings-row {
+    background: var(--bg-alt); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 12px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .mock-settings-label { font-size: 10px; color: var(--text); font-weight: 600; }
+  .mock-settings-sub { font-size: 8.5px; color: var(--text-muted); margin-top: 2px; }
+  .mock-chip-row { display: flex; gap: 5px; margin-top: 6px; }
+  .mock-chip {
+    font-size: 9px; padding: 4px 8px; border-radius: 999px;
+    border: 1px solid var(--border); color: var(--text-muted);
+  }
+  .mock-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .mock-time-row { display: flex; gap: 8px; align-items: center; }
+  .mock-time-box {
+    flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 8px; text-align: center; font-size: 10px; font-weight: 600;
+  }
+  .mock-switch { width: 30px; height: 16px; border-radius: 999px; background: var(--accent); position: relative; flex-shrink: 0; }
+  .mock-switch::after {
+    content: ""; position: absolute; top: 2px; right: 2px; width: 12px; height: 12px;
+    border-radius: 50%; background: #fff;
+  }
 </style>
 </head>
 <body>
@@ -314,6 +382,109 @@
         <h3>Bagikan ke WhatsApp</h3>
         <p>Kirim ayat + kalimat penguatan ke teman atau keluarga dengan satu tombol.</p>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>📱 Tampilan Aplikasi</h2>
+    <div class="shots-grid">
+
+      <div class="shot-item">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="mock-appbar">📖 Firman Reminder</div>
+            <div class="mock-body">
+              <div class="mock-verse-card">
+                <div class="mock-ref">Yesaya 41:10</div>
+                <div class="mock-verse-text">
+                  Jangan takut, sebab Aku menyertaimu; jangan cemas, sebab
+                  Akulah Allahmu, Aku akan menguatkan dan menolongmu.
+                </div>
+                <div class="mock-encourage">
+                  💬 Ketakutanmu tidak lebih besar dari penyertaan-Nya.
+                </div>
+              </div>
+              <div class="mock-btn">🔀 Ayat Berikutnya</div>
+              <div class="mock-btn-row">
+                <div class="mock-btn outline">📖 Baca Pasal</div>
+                <div class="mock-btn outline">💬 Bagikan</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-caption">Layar Utama</div>
+        <div class="shot-desc">Ayat, referensi &amp; kalimat penguatan, plus tombol ayat berikutnya.</div>
+      </div>
+
+      <div class="shot-item">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="mock-appbar">⚙️ Pengaturan</div>
+            <div class="mock-body">
+              <div class="mock-settings-row" style="display:block;">
+                <div class="mock-settings-label">Interval Notifikasi</div>
+                <div class="mock-chip-row">
+                  <div class="mock-chip">30 mnt</div>
+                  <div class="mock-chip active">60 mnt</div>
+                  <div class="mock-chip">120 mnt</div>
+                </div>
+              </div>
+              <div class="mock-settings-row" style="display:block;">
+                <div class="mock-settings-label">Jam Aktif</div>
+                <div class="mock-time-row" style="margin-top:6px;">
+                  <div class="mock-time-box">07:00</div>
+                  <span style="color:var(--text-muted);">–</span>
+                  <div class="mock-time-box">22:00</div>
+                </div>
+              </div>
+              <div class="mock-settings-row">
+                <div>
+                  <div class="mock-settings-label">Alarm &amp; Pengingat</div>
+                  <div class="mock-settings-sub">Notifikasi tepat waktu</div>
+                </div>
+                <div class="mock-switch"></div>
+              </div>
+              <div class="mock-settings-row">
+                <div>
+                  <div class="mock-settings-label">Izinkan Notifikasi Tetap Berjalan</div>
+                  <div class="mock-settings-sub">Nonaktifkan optimasi baterai</div>
+                </div>
+                <div class="mock-switch"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-caption">Pengaturan</div>
+        <div class="shot-desc">Atur interval, jam aktif, dan izin alarm/baterai.</div>
+      </div>
+
+      <div class="shot-item">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div style="background:#e8e5df; flex:1; display:flex; flex-direction:column; justify-content:flex-end; padding:16px 10px;">
+              <div style="font-size:9px; color:#555; padding:0 4px 6px;">Sekarang</div>
+              <div style="background:#fff; border-radius:14px; padding:12px; box-shadow:0 4px 14px rgba(0,0,0,0.15);">
+                <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+                  <span style="font-size:14px;">📖</span>
+                  <span style="font-size:10px; font-weight:700; color:#222;">Firman Reminder</span>
+                </div>
+                <div style="font-size:10px; font-weight:700; color:var(--accent); margin-bottom:4px;">
+                  Mazmur 23:1
+                </div>
+                <div style="font-size:9.5px; line-height:1.4; color:#333;">
+                  TUHAN adalah gembalaku, aku tidak akan pernah kekurangan.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shot-caption">Notifikasi Layar Terkunci</div>
+        <div class="shot-desc">Ayat tetap muncul walau HP dalam keadaan terkunci.</div>
+      </div>
+
     </div>
   </section>
 
